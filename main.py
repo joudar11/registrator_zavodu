@@ -176,6 +176,5 @@ if __name__ == "__main__":
         oprava = input("Pokud si přeješ údaje zadat znovu, napiš A a stiskni enter.\nKterákoliv jiná volba spustí v daný čas registraci.: ").upper()
         if oprava != "A":
             proceed = True
-        else:
-            print(DIVIDER)
+        print(DIVIDER)
     registrace()
