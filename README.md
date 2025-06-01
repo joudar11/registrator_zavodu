@@ -38,11 +38,11 @@ Skript spustí interaktivní rozhraní, kde zadáš:
 
 - číslo zbrojního průkazu (ZP ve formátu `ZP123456`)
 - (volitelné) LEX ID
-- název divize (např. `Optik/ Kompaktní pistole`)
+- název divize (např. `Optik/Kompaktní pistole`)
 - číslo squadu
 - URL závodu
 - e‑mail a heslo pro přihlášení
-- (volitelné) čas spuštění registrace (např. `2025-06-01 09:59:30`)
+- čas spuštění registrace (např. `2025-06-01 09:00:00`)
 
 ---
 
