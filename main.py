@@ -91,46 +91,37 @@ def registrace():
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
         page.goto(URL)
-        # Pokud je čas zadán → časovaný režim
-        if DATUM_CAS_REGISTRACE is not None:
-            try:
-                cas_registrace = datetime.strptime(DATUM_CAS_REGISTRACE, "%Y-%m-%d %H:%M:%S")
-            except ValueError:
-                print("❌ DATUM_CAS_REGISTRACE má špatný formát. Použij RRRR-MM-DD HH:MM:SS.")
-                return
 
-            cas_prihlaseni = cas_registrace - timedelta(seconds=30)
 
-            print(f"⏳ Čekám na čas přihlášení: {cas_prihlaseni}")
-            while datetime.now() < cas_prihlaseni:
-                time.sleep(0.1)
+        try:
+            cas_registrace = datetime.strptime(DATUM_CAS_REGISTRACE, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            print("❌ DATUM_CAS_REGISTRACE má špatný formát.")
+            return
 
-            # Přihlášení
-            print("🔐 Přihlašuji se...")
-            page.click(SELECTOR_TLACITKO_PRIHLASIT)
-            page.wait_for_selector(SELECTOR_INPUT_LOGIN)
-            page.fill(SELECTOR_INPUT_LOGIN, LOGIN)
-            page.fill(SELECTOR_INPUT_HESLO, HESLO)
-            page.click(SELECTOR_TLACITKO_LOGIN)
+        cas_prihlaseni = cas_registrace - timedelta(seconds=30)
 
-            cilovy_cas = cas_registrace + timedelta(seconds=0.5)
-            print(f"⏳ Čekám na čas registrace: {cilovy_cas}")
-            while datetime.now() < cilovy_cas:
-                time.sleep(0.05)
+        print(f"⏳ Čekám na čas přihlášení: {cas_prihlaseni}")
+        while datetime.now() < cas_prihlaseni:
+            time.sleep(0.1)
 
-            # Refresh
-            print("🔄 Refreshuji stránku...")
-            page.reload()
-            page.wait_for_load_state("load")
+        # Přihlášení
+        print("🔐 Přihlašuji se...")
+        page.click(SELECTOR_TLACITKO_PRIHLASIT)
+        page.wait_for_selector(SELECTOR_INPUT_LOGIN)
+        page.fill(SELECTOR_INPUT_LOGIN, LOGIN)
+        page.fill(SELECTOR_INPUT_HESLO, HESLO)
+        page.click(SELECTOR_TLACITKO_LOGIN)
 
-        else:
-            # Režim bez časování → rovnou přihlášení
-            print("⚡ Přihlašuji se a rovnou registruji (bez časování)...")
-            page.click(SELECTOR_TLACITKO_PRIHLASIT)
-            page.wait_for_selector(SELECTOR_INPUT_LOGIN)
-            page.fill(SELECTOR_INPUT_LOGIN, LOGIN)
-            page.fill(SELECTOR_INPUT_HESLO, HESLO)
-            page.click(SELECTOR_TLACITKO_LOGIN)
+        cilovy_cas = cas_registrace + timedelta(seconds=0.5)
+        print(f"⏳ Čekám na čas registrace: {cilovy_cas}")
+        while datetime.now() < cilovy_cas:
+            time.sleep(0.05)
+
+        # Refresh
+        print("🔄 Refreshuji stránku...")
+        page.reload()
+        page.wait_for_load_state("load")
 
         page.wait_for_selector(SELECTOR_TLACITKO_REGISTRACE)
         # Společná část registrace
