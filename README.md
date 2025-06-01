@@ -1,6 +1,6 @@
 # Automatický registrátor závodů LOS
 
-Tento skript umožňuje automatizovanou registraci na závody. Využívá knihovnu **Playwright**, běží v režimu bez zobrazení prohlížeče (headless) a podporuje jak okamžité spuštění, tak i registraci přesně ve stanovený čas.
+Tento skript umožňuje automatizovanou registraci na závody. Využívá knihovnu **Playwright**, běží v režimu se zobrazením prohlížeče a podporuje registraci přesně ve stanovený čas.
 
 ---
 
