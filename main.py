@@ -37,7 +37,7 @@ def get_doklad():
 def get_LEX():
     print("Zadej kontrolní kód členství LEX (CASE SENSITIVE).")
     print("Pokud nejsi členem LEX, ponech pole prázdné!")
-    lex = input("Kontrolní kód:").strip()
+    lex = input("Kontrolní kód: ").strip()
     if lex == "":
         return None
     else:
@@ -91,7 +91,6 @@ def registrace():
         browser = p.chromium.launch(headless=False)
         page = browser.new_page()
         page.goto(URL)
-
         # Pokud je čas zadán → časovaný režim
         if DATUM_CAS_REGISTRACE is not None:
             try:
@@ -109,7 +108,7 @@ def registrace():
             # Přihlášení
             print("🔐 Přihlašuji se...")
             page.click(SELECTOR_TLACITKO_PRIHLASIT)
-            time.sleep(0.5)
+            page.wait_for_selector(SELECTOR_INPUT_LOGIN)
             page.fill(SELECTOR_INPUT_LOGIN, LOGIN)
             page.fill(SELECTOR_INPUT_HESLO, HESLO)
             page.click(SELECTOR_TLACITKO_LOGIN)
@@ -122,18 +121,18 @@ def registrace():
             # Refresh
             print("🔄 Refreshuji stránku...")
             page.reload()
-            time.sleep(0.5)
+            page.wait_for_load_state("load")
 
         else:
             # Režim bez časování → rovnou přihlášení
             print("⚡ Přihlašuji se a rovnou registruji (bez časování)...")
             page.click(SELECTOR_TLACITKO_PRIHLASIT)
-            time.sleep(0.5)
+            page.wait_for_selector(SELECTOR_INPUT_LOGIN)
             page.fill(SELECTOR_INPUT_LOGIN, LOGIN)
             page.fill(SELECTOR_INPUT_HESLO, HESLO)
             page.click(SELECTOR_TLACITKO_LOGIN)
-            time.sleep(0.5)
 
+        page.wait_for_selector(SELECTOR_TLACITKO_REGISTRACE)
         # Společná část registrace
         page.fill(SELECTOR_INPUT_DOKLAD, CISLO_DOKLADU)
 
@@ -146,8 +145,8 @@ def registrace():
         page.check(SELECTOR_CHECKBOX_GDPR)
         page.click(SELECTOR_TLACITKO_REGISTRACE)
 
-        print("✅ Registrace dokončena. Program bude ukončen za 60 sekund.")
-        time.sleep(60)
+        print("✅ Registrace dokončena.")
+        input("Stiskni ENTER pro zavření browseru a ukončení aplikace...")
         # browser.close()  # nech otevřené pro kontrolu
 
 # --- SPUŠTĚNÍ ---
@@ -188,5 +187,4 @@ if __name__ == "__main__":
             proceed = True
         else:
             print(DIVIDER)
-    print("REG")
-    #registrace()
+    registrace()
