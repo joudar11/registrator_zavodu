@@ -6,7 +6,7 @@ Tento skript umožňuje automatizovanou registraci na závody. Využívá knihov
 
 ## 🔧 Funkce
 
-- Automatické přihlášení do účtu na loslex.cz
+- Automatické přihlášení do účtu na stránkách LOSu
 - Vyplnění registračního formuláře (číslo ZP, LEX ID, divize, squad)
 - Výběr squadu podle zadaného čísla
 - Potvrzení GDPR souhlasu
