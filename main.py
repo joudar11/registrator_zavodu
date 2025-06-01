@@ -44,7 +44,7 @@ def get_LEX():
         return lex
     
 def get_divize():
-    divi = input('Zadej divizi.\n(Přesně tak, jak se ukazuje v dop-down menu na stránkách LEXu,\nnapř. "Optik/ Kompaktní pistole")\n(CASE SENSITIVE)\nDivize: ').strip()
+    divi = input('Zadej divizi.\n(Přesně tak, jak se ukazuje v drop-down menu na stránkách LEXu,\nnapř. "Optik/ Kompaktní pistole")\n(CASE SENSITIVE)\nDivize: ').strip()
     return divi
 
 def get_zavod():
