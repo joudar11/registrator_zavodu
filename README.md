@@ -16,7 +16,7 @@ Tento skript umožňuje automatizovanou registraci na závody. Využívá knihov
 
 ## ✅ Požadavky
 
-- **Python** 3.8+
+- **Python** 3.13
 - **Playwright** (prohlížečové jádro pro automatizaci)
 
 ### Instalace:
